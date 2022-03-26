@@ -1,5 +1,3 @@
-# Customize Dataset
-
 import os
 import pandas as pd
 import numpy as np
@@ -7,30 +5,35 @@ from PIL import Image
 from torch.utils.data import Dataset
 from torchvision import transforms
 
-
-class Skin7(Dataset):
+class Skin7(Dataset): 
     """Skin Lesion"""
-    # root=datas or change data folder
-    def __init__(self, root="./datas", train=True, transform=None):
+    def __init__(self, root="./datas/images", train=True, transform=None):
+        # Image Path
         self.root = os.path.join(root)
-        self.transform = transform
+        # Label Path
         self.train = train
+        if(self.train):
+            self.labelpath = os.path.join("./datas/annotation/train.csv")
+        else:
+            self.labelpath = os.path.join("./datas/annotation/test.csv")
+        # Transforms
+        self.transform = transform
 
     def __getitem__(self, index):
+        # .iloc to locate the image file, class index
+        # Image.open from PIL; .jpg cannot be opened by read_image() 
+        csv = pd.read_csv(self.labelpath)
+        # Remove axes
+        data = csv.values()
+        label = data.iloc[index, 1]
+        image = Image.open(os.path.join(self.root, data.iloc[index, 0]))
+
+        if self.transform is not None:
+            image = self.transform(image)
+
+        return (image, label)
+        
         """
-        # Image and Annotation Paths
-
-        if(self.train):
-            labelpath = os.path.join("./datas/annotation/train.csv")
-        else:
-            labelpath = os.path.join("./datas/annotation/test.csv") 
-        
-        labels = pd.read_csv(labelpath) 
-        imagepath = os.path.join("./datas/images")
-
-        
-        # Read csv and iterate
-        # 
         #         Args:
             index (int): Index
             image of index
@@ -40,10 +43,9 @@ class Skin7(Dataset):
             tuple: (sample, target) where target is class_index of the
                    target class.
         """
-        pass
 
     def __len__(self):
-        return len(self.data)
+        return len(self.labels)
 
    
 
