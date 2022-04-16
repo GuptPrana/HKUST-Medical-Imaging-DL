@@ -6,7 +6,8 @@
 - sdf
 - sdfd  
 ### Assignment 3
-- sdfjk
+- EchoNet Dynamic Dataset containing ultrasound videos of heart
+- data.py converts .avi to array to hold the temporal data 
    
 ### Final Project 
 - coming soon  
