@@ -10,4 +10,7 @@
 - data.py converts .avi to array to hold the temporal data 
    
 ### Final Project 
-- coming soon  
+- Semi-Supervised Learning for 3D Segmentation model with limited labeled data
+- Dataset: http://atriaseg2018.cardiacatlas.org/
+- Experiment with different ratios of labeled and unlabeled data 
+- Add novelties to improve test accuracy
