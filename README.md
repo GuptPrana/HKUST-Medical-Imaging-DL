@@ -3,12 +3,12 @@
 ### Files Description:
 ### Assignment 2
 - 3D UNET Segmentation Network
-- sdf
-- sdfd  
+- Skin Lesion Classification using Contrastive Loss on Cross Entropy Loss
+- Surgical Phase Recognition from Sugical Videos using LSTM and ResNet50
 ### Assignment 3
-- EchoNet Dynamic Dataset containing ultrasound videos of heart
-- data.py converts .avi to array to hold the temporal data 
-   
+- Video Regression on EchoNet Dataset with Supervision 
+- EchoNet Dynamic Dataset contains Ultrasound videos of heart with Ejection Fraction
+
 ### Final Project 
 - Semi-Supervised Learning for 3D Segmentation model with limited labeled data
 - Dataset: http://atriaseg2018.cardiacatlas.org/
