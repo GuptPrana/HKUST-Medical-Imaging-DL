@@ -1,4 +1,4 @@
-## ELEC4010N - AI for Medical Image Analysis
+## Deep Learning in Medical Image Analysis
 
 ### Contains:
 ### Assignment 2
