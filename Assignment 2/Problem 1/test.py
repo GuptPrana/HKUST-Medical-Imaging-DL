@@ -2,12 +2,16 @@ import torch
 import numpy as np
 import math
 from glob import glob
-
+from model import Model
 from dataset import read_h5
+from loss import DiceBCELoss
+from torchvision import transforms
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+loss = DiceBCELoss().to(device)
 
 if __name__ == '__main__':
-    model = None # load your model here
+    model = Model # load your model here
     patch_size = (112, 112, 80)
     stride_xy = 18
     stride_z = 4
@@ -48,4 +52,10 @@ if __name__ == '__main__':
         
         scores = scores / np.expand_dims(counts, axis=0)
         predictions = np.argmax(scores, axis = 0) # final prediction: [w, h, d]
-        metrics = None
+        pred = predictions.unsqueeze(0).transforms.toTensor() 
+        gold = label.unsqueeze(0).transforms.toTensor()
+        test_loss, test_dice = loss(pred, gold)
+        loss_scalar = loss.item()
+        dice_scalar = dice.item()
+        print("loss: {:4f}, dice: {:4f}".format(loss_scalar, dice_scalar))
+        # metrics = None
