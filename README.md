@@ -1,6 +1,6 @@
 ## Deep Learning in Medical Image Analysis
 
-### Contains:
+### Files Description:
 ### Assignment 2
 - 3D UNET Segmentation Network
 - sdf
