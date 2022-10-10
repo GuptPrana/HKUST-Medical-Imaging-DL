@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 from torch.utils.data import Dataset
 from torchvision import transforms
+import matplotlib.pyplot as plt
 
 """
 Args:
@@ -37,7 +38,11 @@ class Skin7(Dataset):
         # Remove axes
         data = csv#.values()
         label = data.iloc[index, 1]
-        image = Image.open(os.path.join(self.root, data.iloc[index, 0]))
+        # image = Image.open(os.path.join(self.root, data.iloc[index, 0]))
+
+        with open(os.path.join(self.root, data.iloc[index, 0]), "rb") as afile:
+            image = Image.open(afile)
+            image.convert("RGB")
 
         if self.transform is not None:
             image = self.transform(image)
@@ -47,6 +52,3 @@ class Skin7(Dataset):
     def __len__(self):
         csv = pd.read_csv(self.labelpath)
         return len(csv)
-
-   
-
